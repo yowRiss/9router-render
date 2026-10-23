@@ -1,0 +1,20 @@
+# Render Blueprint — deploys 9router (free plan)
+# Add HF_TOKEN in the Render dashboard (Settings → Environment) after first apply,
+# or as a secret sync:false value when applying the blueprint.
+services:
+  - type: web
+    name: 9router
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      # Backup/restore to your private HF dataset (free)
+      - key: DATASET_REPO
+        value: kaiiyrzs/9router-data
+      - key: HF_TOKEN
+        sync: false          # paste your HF timeline write token in the dashboard
+      # App config
+      - key: INITIAL_PASSWORD
+        value: "123456"      # change after first login
+      - key: REQUIRE_API_KEY
+        value: "false"
